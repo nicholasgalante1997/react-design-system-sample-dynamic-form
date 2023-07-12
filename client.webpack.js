@@ -8,12 +8,12 @@ dotenv.config();
 
 module.exports = {
     mode: 'production',
-    entry: path.resolve(process.cwd(), 'src', 'web', 'mount-file.tsx'),
+    entry: path.resolve(process.cwd(), 'src', 'web', 'index.tsx'),
     target: ['web', 'es2017'],
     output: {
         clean: false,
         path: path.resolve(process.cwd(), 'build', 'static'),
-        filename: 'bundle.js'
+        filename: '[name].js'
     },
     optimization: {
         splitChunks: {

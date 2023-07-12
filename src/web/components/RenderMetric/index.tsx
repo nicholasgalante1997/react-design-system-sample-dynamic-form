@@ -1,4 +1,4 @@
-import React, { Profiler, ProfilerOnRenderCallback, useCallback } from 'react';
+import React, { Profiler, ProfilerOnRenderCallback } from 'react';
 import { logger, post } from '@/utils';
 
 const onRender: ProfilerOnRenderCallback = function (...args) {
@@ -14,10 +14,9 @@ const onRender: ProfilerOnRenderCallback = function (...args) {
 }
 
 export function withRenderMetrics<P = {} & JSX.IntrinsicAttributes>(Component: React.FC<P>, id: string) {
-    const memoizedOnRender = useCallback(onRender, []);
     return function (props: P) {
         return (
-            <Profiler onRender={memoizedOnRender} id={id}>
+            <Profiler onRender={onRender} id={id}>
                 <Component {...props as P & JSX.IntrinsicAttributes} />
             </Profiler>
         );

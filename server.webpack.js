@@ -24,7 +24,7 @@ module.exports = {
         }
       },
     output: {
-        path: path.resolve(process.cwd(), 'lib'),
+        path: path.resolve(process.cwd(), 'build'),
         filename: 'index.js'
     },
     target: ['node', 'es2022'],

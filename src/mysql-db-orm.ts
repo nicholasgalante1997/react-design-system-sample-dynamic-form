@@ -12,11 +12,11 @@ export class DatabaseManager {
     return mysql.createConnection(this._config);
   }
 
-  async query(query: string, values?: string[]): Promise<mysql.Query | null> {
+  async query<R>(query: string, values?: string[]): Promise<R | null> {
     try {
       const connection = this.connect();
       if (values != null) {
-        const queryResult: mysql.Query = await new Promise((resolve, reject) => {
+        const queryResult: R = await new Promise((resolve, reject) => {
           connection.query(query, values, (err, results, fields) => {
             if (err != null) {
               console.log(err.message);
@@ -31,7 +31,7 @@ export class DatabaseManager {
         return queryResult;
       }
 
-      const queryResult: mysql.Query = await new Promise((resolve, reject) => {
+      const queryResult: R = await new Promise((resolve, reject) => {
         connection.query(query, (err, results, fields) => {
           if (err != null) {
             console.log(err.message);
@@ -76,8 +76,28 @@ async function pollDatabaseConnection(): Promise<boolean> {
   })
 }
 
-async function checkForNecessaryTables() {
+async function existingDatabases() {
+  try {
+    const res = await db.query<{ Database: string }[]>('SHOW DATABASES;');
+    if (res) {
+      const values = (res).map(d => d.Database);
+      if (res.length && values.includes('form') && values.includes('render-metrics')) {
+        return true;
+      } 
+    }
+    return false;
+  } catch (e) {}
+}
 
+async function buildDatabaseAndTables() {
+  try {
+    await db.query('CREATE DATABASE [IF NOT EXISTS] form;');
+    await db.query('USE form;');
+    await db.query('CREATE TABLE if not exists form (id: UNIQUE NOT NULL PRIMARY KEY VARCHAR(40), updatedAt: VARCHAR(25), formData: VARCHAR(10000))');
+    await db.query('CREATE TABLE if not exists render-metrics (id: VARCHAR(40), timestamp: VARCHAR(25), renderData: VARCHAR(10000))');
+  } catch (e) {
+    logger.error(e);
+  }
 }
 
 async function attemptConnection() {
@@ -108,8 +128,14 @@ async function attemptConnection() {
 export async function setupDatabase() {
   try {
     let isConnected = await attemptConnection();
-
-  } catch(e) {
+    if (isConnected) {
+      if (!await existingDatabases()) {
+        await buildDatabaseAndTables();
+      }
+    } else {
+      throw new Error('Unable to connect to db... check server log output');
+    }
+   } catch(e) {
     logger.error(e);
     process.exit(2);
   }

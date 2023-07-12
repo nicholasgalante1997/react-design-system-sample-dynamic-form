@@ -37,6 +37,7 @@ specifiers:
   mysql: ^2.18.1
   pino: ^8.14.1
   prettier: ^3.0.0
+  process: ^0.11.10
   react: ^18.2.0
   react-dom: ^18.2.0
   storybook: ^7.0.26
@@ -54,6 +55,7 @@ dependencies:
   express: 4.18.2
   mysql: 2.18.1
   pino: 8.14.1
+  process: 0.11.10
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
