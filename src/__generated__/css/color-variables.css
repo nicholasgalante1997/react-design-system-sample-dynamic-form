@@ -1,19 +1,18 @@
 :root {
-	--shade-100:#F8F9FA;
-	--shade-200:#E9ECEF;
-	--shade-300:#DEE2E6;
-	--shade-400:#CED4DA;
-	--shade-500:#ADB5BD;
-	--shade-600:#6C757D;
-	--shade-700:#495057;
-	--shade-800:#343A40;
-	--shade-900:#212529;
-	--text-link-normal-100:#0000EE;
-	--text-link-visited-100:#551A8B;
-	--text-link-active-100:#EE0000;
-	--text-heading-100:#212529;
-	--text-heading-200:#343A40;
-	--text-p-100:#212529;
-	--text-p-200:#343A40;
-	
+  --shade-100: #f8f9fa;
+  --shade-200: #e9ecef;
+  --shade-300: #dee2e6;
+  --shade-400: #ced4da;
+  --shade-500: #adb5bd;
+  --shade-600: #6c757d;
+  --shade-700: #495057;
+  --shade-800: #343a40;
+  --shade-900: #212529;
+  --text-link-normal-100: #0000ee;
+  --text-link-visited-100: #551a8b;
+  --text-link-active-100: #ee0000;
+  --text-heading-100: #212529;
+  --text-heading-200: #343a40;
+  --text-p-100: #212529;
+  --text-p-200: #343a40;
 }

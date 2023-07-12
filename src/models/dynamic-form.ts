@@ -11,7 +11,6 @@ interface IDynamicForm {
 const defaultFormState = {
   heading: 'Mobile Plans',
   headingAccentText: '$39.99'
-
 }
 
 export class DynamicForm implements IDynamicForm {

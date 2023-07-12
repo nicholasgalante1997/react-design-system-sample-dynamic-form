@@ -1,5 +1,5 @@
 import { type NextFunction, type Request, type Response } from 'express'
-import { logger } from './utils';
+import { logger } from './utils'
 
 interface TraceOptions {
   verbose: boolean
