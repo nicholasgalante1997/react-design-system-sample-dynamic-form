@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  server-driven-form-proto:
+    image: spectrum-server-driven-form:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    expose:
+      - "3000"
+    ports:
+      - '3000:3000'
+    env_file: .env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MYSQL_ROOT_PASSWORD=spectrum
+      - MYSQL_DATABASE=form
+    depends_on:
+      - mysql_db
+    networks:
+      - spectrum_net
+  mysql_db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    restart: on-failure
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=spectrum
+      - MYSQL_DATABASE=form      
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '3307:3306'
+    volumes: 
+      - db-config:/etc/mysql 
+      - db-data:/var/lib/mysql 
+    networks:
+        - spectrum_net
+networks:
+  spectrum_net:
+
+volumes:
+  db-config:
+  db-data:
+    
