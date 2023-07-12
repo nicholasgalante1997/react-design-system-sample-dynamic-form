@@ -1,6 +1,6 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { Link } from './Link'
-import { type LinkProps } from './types'
+import { type Meta, type StoryObj } from '@storybook/react';
+import { Link } from './Link';
+import { type LinkProps } from './types';
 
 const meta: Meta<typeof Link> = {
   title: 'components/base-kit/link',
@@ -8,20 +8,20 @@ const meta: Meta<typeof Link> = {
   args: {
     scale: {
       type: 'select',
-      options: [100, 200, 300, 400]
-    }
+      options: [100, 200, 300, 400],
+    },
   },
   decorators: [],
-  parameters: {}
-}
+  parameters: {},
+};
 
-export default meta
+export default meta;
 
-type LinkStory = StoryObj<typeof Link>
+type LinkStory = StoryObj<typeof Link>;
 
 export const Main: LinkStory = {
   args: {
-    scale: 200
+    scale: 200,
   },
-  render: (args: LinkProps) => <Link {...args}>Humpback Whales In Washington</Link>
-}
+  render: (args: LinkProps) => <Link {...args}>Humpback Whales In Washington</Link>,
+};

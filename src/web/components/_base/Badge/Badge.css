@@ -1,0 +1,12 @@
+.badge-container-border {
+  border: 1px solid var(--shade-700);
+}
+
+.badge-container-width {
+  width: fit-content;
+}
+
+.badge-check-svg {
+  margin-right: 8px;
+  vertical-align: middle;
+}

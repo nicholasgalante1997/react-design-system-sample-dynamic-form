@@ -1,6 +1,6 @@
 export interface SectionConfiguration {
-  id: string
-  subheading: string
-  dir: 'row' | 'column'
-  interactables: Interactable[]
+  id: string;
+  subheading: string;
+  dir: 'row' | 'column';
+  interactables: Interactable[];
 }

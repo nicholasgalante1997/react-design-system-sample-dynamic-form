@@ -1,6 +1,6 @@
 interface BadgeSelectionInteractable {
-  kind: 'badge-selection'
-  props: BadgeSelectionInteractableProps
+  kind: 'badge-selection';
+  props: BadgeSelectionInteractableProps;
 }
 
-export type Interactable = BadgeSelectionInteractable
+export type Interactable = BadgeSelectionInteractable;

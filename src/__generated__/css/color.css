@@ -142,3 +142,21 @@
 .color-text-p-200 {
   color: #343a40;
 }
+.background-badge-active-100 {
+  background: #0080fe;
+}
+.background-color-badge-active-100 {
+  background-color: #0080fe;
+}
+.color-badge-active-100 {
+  color: #0080fe;
+}
+.background-badge-normal-100 {
+  background: #f8f9fa;
+}
+.background-color-badge-normal-100 {
+  background-color: #f8f9fa;
+}
+.color-badge-normal-100 {
+  color: #f8f9fa;
+}
