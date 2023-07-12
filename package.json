@@ -17,6 +17,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tanstack/react-query": "^4.29.19",
+    "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -52,6 +54,7 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.32.2",
+    "html-webpack-plugin": "^5.5.3",
     "json-loader": "^0.5.7",
     "prettier": "^3.0.0",
     "storybook": "^7.0.26",

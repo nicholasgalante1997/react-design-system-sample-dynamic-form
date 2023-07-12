@@ -1,6 +1,8 @@
 import React, { memo, useEffect, useState } from 'react';
-import { type BadgeProps } from './types';
 import classNames from 'classnames';
+import { withRenderMetrics } from '@/web/components/RenderMetric';
+import { type BadgeProps } from './types';
+
 
 function BadgeComponent(props: BadgeProps) {
   const { active = false, onChange, scale, withIcon, children } = props;
@@ -33,11 +35,10 @@ function BadgeComponent(props: BadgeProps) {
     />
   );
 
-  console.log({ checkJsx });
-
   useEffect(() => {
     onChange != null && onChange(active);
   }, [active]);
+
   return (
     <div className={containerClassName} onClick={onClick}>
       <span className={spanClassName}>
@@ -48,4 +49,7 @@ function BadgeComponent(props: BadgeProps) {
   );
 }
 
-export const Badge = memo(BadgeComponent);
+export const Badge = withRenderMetrics(
+  memo(BadgeComponent),
+  'Badge'
+);
