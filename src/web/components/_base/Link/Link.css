@@ -1,0 +1,11 @@
+.spectrum-link {
+    cursor: pointer;
+}
+
+.spectrum-link:visited {
+    color: var(--text-link-visited-100);
+}
+
+.spectrum-link:active {
+    color: var(--text-link-active-100);
+}
