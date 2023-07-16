@@ -1,31 +1,30 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useMemo } from 'react';
 import classNames from 'classnames';
 import { withRenderMetrics } from '@/web/components/RenderMetric';
 import { type BadgeProps } from './types';
 
-
 function BadgeComponent(props: BadgeProps) {
-  const { active = false, onChange, scale, withIcon, children } = props;
-  const [lActive, setLActive] = useState(active);
-  const onClick = () => {
-    setLActive((p) => !p);
-  };
-  const containerClassName = classNames({
-    'badge-container-border': true,
-    'br-300': true,
-    'badge-container-width': true,
-    'background-badge-active-100': lActive,
-    'background-badge-normal-100': !lActive,
-    'p-200': true,
-  });
-  const spanClassName = classNames({
-    'color-shade-900': !lActive,
-    'color-shade-100': lActive,
-    [`body-normal-${scale}`]: !lActive,
-    [`body-bold-${scale}`]: lActive,
-  });
+  const { active = false, onChange, scale, withIcon, children, className, ...rest } = props;
+  const joinedClassnames = useMemo(() => ({
+    container: classNames({
+      'badge-container-border-normal': !active,
+      'badge-container-border-active': active,
+      'br-300': true,
+      'badge-container': true,
+      'background-badge-active-100': active,
+      'background-badge-normal-100': !active,
+      'p-200': true,
+      [className ?? '']: !!className,
+    }),
+    span: classNames({
+      'color-shade-900': !active,
+      'color-shade-100': active,
+      [`body-normal-${scale}`]: !active,
+      [`body-bold-${scale}`]: active,
+    })
+  }), [active]);
 
-  const checkJsx = withIcon && lActive && (
+  const checkJsx = useMemo(() => withIcon && active && (
     <img
       className="badge-check-svg"
       height="16px"
@@ -33,15 +32,11 @@ function BadgeComponent(props: BadgeProps) {
       src="/check.svg"
       alt="a check mark"
     />
-  );
-
-  useEffect(() => {
-    onChange != null && onChange(active);
-  }, [active]);
+  ), [withIcon, active]);
 
   return (
-    <div className={containerClassName} onClick={onClick}>
-      <span className={spanClassName}>
+    <div className={joinedClassnames.container} onClick={onChange} {...rest}>
+      <span className={joinedClassnames.span}>
         {checkJsx}
         {children}
       </span>
@@ -49,7 +44,4 @@ function BadgeComponent(props: BadgeProps) {
   );
 }
 
-export const Badge = withRenderMetrics(
-  memo(BadgeComponent),
-  'Badge'
-);
+export const Badge = withRenderMetrics(memo(BadgeComponent), 'Badge');

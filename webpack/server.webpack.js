@@ -8,6 +8,9 @@ dotenv.config();
 module.exports = {
     entry: path.resolve(process.cwd(), 'src', 'index.ts'),
     mode: 'production',
+    optimization: {
+      minimize: false
+    },
     module: {
         rules: [
           {

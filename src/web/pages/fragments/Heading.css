@@ -1,9 +1,15 @@
 .heading-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: fit-content;
-    min-width: 300px;
-    min-height: 60px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40px;
+  min-width: 100%;
+  padding-left: var(--spacing-200);
+  background-color: black;
+}
+
+.heading-container span {
+  font-weight: 900;
 }

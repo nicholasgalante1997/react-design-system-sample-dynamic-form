@@ -5,7 +5,7 @@ interface IDynamicForm {
   width?: string | number;
   heading: string;
   collapsible?: boolean;
-  sections: SectionConfiguration[];
+  pages: SectionConfiguration[][];
   className?: string;
   id?: string;
 }
@@ -13,7 +13,7 @@ interface IDynamicForm {
 const defaultFormState = {
   heading: 'Mobile Plans',
   headingAccentText: '$39.99',
-  sections: []
+  pages: [],
 };
 
 export class DynamicForm implements IDynamicForm {
@@ -21,24 +21,25 @@ export class DynamicForm implements IDynamicForm {
   width?: string | number | undefined;
   heading: string;
   collapsible?: boolean | undefined;
-  sections: SectionConfiguration[];
+  pages: SectionConfiguration[][];
   className?: string | undefined;
   id?: string | undefined;
   constructor(options: IDynamicForm = defaultFormState) {
     this.height = options.height;
     this.heading = options.heading;
     this.collapsible = options.collapsible;
-    this.sections = options.sections;
+    this.pages = options.pages;
     this.width = options.width;
     this.className = options.className;
     this.id = options.id;
-  };
+  }
   update(key: string, value: any) {
     this[key as keyof typeof this] = value;
   }
   toString() {
     /** format instance fields to json string to persist to db */
   }
+  asJsonObject() {}
   commit() {
     /** write dynamic form value to db */
   }

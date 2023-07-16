@@ -1,9 +1,15 @@
-import { Interactable } from "./interactable";
+import { Interactable } from './interactable';
+
+interface SubGroup {
+  interactables: Interactable[];
+  height?: string;
+  maxWidth?: string;
+}
 
 export interface SectionConfiguration {
   id: string;
   subheading: string;
   subtext?: string;
   dir: 'row' | 'column';
-  interactables: Interactable[];
+  subgroups: SubGroup[];
 }

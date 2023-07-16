@@ -10,7 +10,9 @@ RUN npm install
 
 COPY ./tsconfig.json .
 
-COPY ./server.webpack.js .
+COPY .babelrc .
+
+COPY ./webpack/ ./webpack/
 
 COPY tokens.json .
 
@@ -18,7 +20,9 @@ COPY genTokens.mjs .
 
 COPY ./src/ ./src/
 
-COPY ./.env ./.env
+COPY ./html/ ./html/
+
+COPY ./assets/ ./assets/
 
 RUN npm run build
 
@@ -26,12 +30,13 @@ RUN rm -rf \
     node_modules \
     src \
     tsconfig.json \
-    webpack.server.js
+    webpack.server.js \ 
+    client.webpack.js
 
 RUN npm install --only=production
 
 ENV PORT=3000
 
-EXPOSE 8080
+EXPOSE 3000
 
 CMD ["npm", "run", "start"]

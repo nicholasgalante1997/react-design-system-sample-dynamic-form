@@ -8,30 +8,38 @@ import '../spectrum.css';
 
 const queryClient = new QueryClient();
 
-function App() {
-    const [view, setView] = useState<'configure' | 'form'>('configure');
-    return (
-        <QueryClientProvider client={queryClient}>
-            <div className="frame">
-                <Heading current={view} update={(next) => setView(next)} />
-                <Divider />
-                <main>
+const pages = [
+  {
+    order: 1,
+    parentFormId: 'mobile-plans',
+    sections: []
+  }
+];
 
-                </main>
-            </div>
-        </QueryClientProvider>
-    )
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <div className="frame">
+        <Heading />
+        <main className="main-section">
+          <aside className="config-section"></aside>
+          <div className="form-section">
+            <FormView pages={pages} title="Mobile Plans" />
+          </div>
+        </main>
+      </div>
+    </QueryClientProvider>
+  );
 }
 
 function mountApp() {
-    console.log('im being called during the page mount')
-    let el = document.querySelector('#spectrum-mount');
-    if (!el) {
-        el = document.createElement('div');
-        el.id = 'spectrum-mount';
-        document.body.appendChild(el);
-    }
-    createRoot(el).render(<App />);
+  let el = document.querySelector('#spectrum-mount');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'spectrum-mount';
+    document.body.appendChild(el);
+  }
+  createRoot(el).render(<App />);
 }
 
 mountApp();

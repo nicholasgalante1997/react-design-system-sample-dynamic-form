@@ -20,11 +20,23 @@ const meta: Meta<typeof Badge> = {
 
 export default meta;
 
-type BodyStory = StoryObj<typeof Badge>;
+type BadgeStory = StoryObj<typeof Badge>;
 
-export const Main: BodyStory = {
+export const Normal: BadgeStory = {
   args: {
     scale: 200,
+    key: 'story-1'
   },
   render: (args) => <Badge {...args}>The Call of Cthulhu</Badge>,
 };
+
+export const Active: BadgeStory = {
+  args: {
+    scale: 200,
+    withIcon: true,
+    active: true,
+    key: 'story-2'
+  },
+  render: (args) => <Badge {...args}>The Call of Cthulhu</Badge>,
+};
+

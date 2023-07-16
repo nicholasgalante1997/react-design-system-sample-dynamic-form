@@ -55,10 +55,10 @@ export const db = new DatabaseManager({
   host: 'mysql_db',
   user: 'root',
   password: 'spectrum',
-  database: 'form'
-})
+  database: 'form',
+});
 
-async function pollDatabaseConnection(): Promise<boolean> {
+export async function pollDatabaseConnection(): Promise<boolean> {
   /** Promisify mysql.Connection#connect() which is synchronous but takes a callback */
   return new Promise((resolve, reject) => {
     /** get an instance of mysql.Connection */
@@ -67,76 +67,52 @@ async function pollDatabaseConnection(): Promise<boolean> {
     dbQuerier.connect((err) => {
       /** if we've errored on connection, reject and error */
       if (err) {
+        dbQuerier.end();
+        logger.error(err);
         resolve(false);
+        return;
       }
+      dbQuerier.end();
       /** resolve if weve established a connection */
       logger.info('connected to database!');
       resolve(true);
-    })
-  })
+    });
+  });
 }
 
-async function existingDatabases() {
+export async function existingDatabases() {
   try {
     const res = await db.query<{ Database: string }[]>('SHOW DATABASES;');
     if (res) {
-      const values = (res).map(d => d.Database);
-      if (res.length && values.includes('form') && values.includes('render-metrics')) {
+      const values = res.map((d) => d.Database);
+      if (res.length && values.includes('form')) {
         return true;
-      } 
+      }
     }
     return false;
-  } catch (e) {}
-}
-
-async function buildDatabaseAndTables() {
-  try {
-    await db.query('CREATE DATABASE [IF NOT EXISTS] form;');
-    await db.query('USE form;');
-    await db.query('CREATE TABLE if not exists form (id: UNIQUE NOT NULL PRIMARY KEY VARCHAR(40), updatedAt: VARCHAR(25), formData: VARCHAR(10000))');
-    await db.query('CREATE TABLE if not exists render-metrics (id: VARCHAR(40), timestamp: VARCHAR(25), renderData: VARCHAR(10000))');
   } catch (e) {
-    logger.error(e);
+    logger.error('An error was thrown during the operation `existingDatabases()`');
+    throw e;
   }
 }
 
-async function attemptConnection() {
+export async function buildFormTable() {
   try {
-    let retryInterval = 3000;
-    let isConnected = false;
-    let maxAttempts = 20;
-    let attempt = 0;
-
-    const interval = setInterval(async () => {
-      if (isConnected) {
-        clearInterval(interval);
-      }
-      if (attempt > maxAttempts) {
-        clearInterval(interval)
-      }
-      attempt += 1;
-      isConnected = await pollDatabaseConnection();
-    }, retryInterval);
-
-    return isConnected;
-
-  } catch(e) {
-    logger.error(e);
-  } 
+    await db.query(
+      'CREATE TABLE if not exists form (id VARCHAR(40) UNIQUE NOT NULL, updatedAt VARCHAR(25), form VARCHAR(10000) NOT NULL, PRIMARY KEY (id))'
+    );
+  } catch (e) {
+    logger.error('An error was thrown during table creation `form`.');
+    throw e;
+  }
 }
 
-export async function setupDatabase() {
+export async function buildFormDB() {
   try {
-    let isConnected = await attemptConnection();
-    if (isConnected) {
-      if (!await existingDatabases()) {
-        await buildDatabaseAndTables();
-      }
-    } else {
-      throw new Error('Unable to connect to db... check server log output');
-    }
-   } catch(e) {
-    logger.error(e);
-    process.exit(2);
+    await db.query('CREATE DATABASE [IF NOT EXISTS] form;');
+    await db.query('USE form;');
+  } catch (e) {
+    logger.error('An error was thrown during table creation `form`.');
+    throw e;
   }
 }

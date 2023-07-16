@@ -1,27 +1,36 @@
 import { server } from './server';
 import { logger } from './utils/logger';
+import {
+  pollDatabaseConnection,
+  existingDatabases,
+  buildFormTable,
+  buildFormDB,
+} from './mysql-db-orm';
 
 const PORT = process.env.PORT ?? (3000 as const);
 const listenerCb = () => {
   logger.info('Starting `server-driven-form` server...');
 };
 
-process.on('exit', (code) => {
-  if (code === 0) {
-    logger.info('Process exited successfully.');
-  }
-  if (code === 1) {
-    logger.warn('Process exited due to a Server issue.')
-  }
-  if (code === 2) {
-    logger.warn('Process exited from a Database issue');
-  }
-});
-
-(function () {
+(async function () {
   try {
-    server.listen(PORT, listenerCb);
+    if (await pollDatabaseConnection()) {
+      const hasExistingDatabases = await existingDatabases();
+      if (!hasExistingDatabases) {
+        await buildFormDB();
+      }
+      await buildFormTable();
+      server.listen(PORT, listenerCb);
+    } else {
+      /**
+       * If we cant connect to the db,
+       * docker is likely still setting it up, but we can kill the process
+       * and allow the container to restart at a later time when the db is set up
+       */
+      throw new Error('Unable to connect to DB');
+    }
   } catch (e) {
     logger.error(e);
+    process.exit(1);
   }
 })();

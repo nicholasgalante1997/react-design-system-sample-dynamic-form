@@ -1,1 +1,4 @@
-.motion-raise:hover{box-shadow: var(--box-shadow-100);transform:translateY(4px);}
+.motion-raise:hover {
+  box-shadow: var(--box-shadow-100);
+  transform: translateY(4px);
+}
