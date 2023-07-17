@@ -1,0 +1,43 @@
+select {
+  width: 268px;
+  line-height: 1.15;
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
+    no-repeat right #ddd;
+  -webkit-appearance: none;
+  background-position-x: 244px;
+}
+
+.select-input {
+  width: fit-content;
+  min-width: 268px;
+  background-color: var(--shade-200);
+  border: 1px solid var(--shade-400);
+  cursor: pointer;
+  margin-top: var(--spacing-200);
+  border-radius: var(--border-radius-300);
+  padding: var(--spacing-200);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.select-input:hover {
+  background-color: var(--shade-300);
+  border: 1px solid var(--shade-500);
+}
+
+.select-input:active {
+  border: 1px solid var(--shade-600);
+}
+
+.select-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-items: flex-start;
+}
+
+.select-label {
+  font-weight: 300;
+}

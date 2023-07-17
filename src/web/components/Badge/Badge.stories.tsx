@@ -25,7 +25,7 @@ type BadgeStory = StoryObj<typeof Badge>;
 export const Normal: BadgeStory = {
   args: {
     scale: 200,
-    key: 'story-1'
+    key: 'story-1',
   },
   render: (args) => <Badge {...args}>The Call of Cthulhu</Badge>,
 };
@@ -35,8 +35,7 @@ export const Active: BadgeStory = {
     scale: 200,
     withIcon: true,
     active: true,
-    key: 'story-2'
+    key: 'story-2',
   },
   render: (args) => <Badge {...args}>The Call of Cthulhu</Badge>,
 };
-

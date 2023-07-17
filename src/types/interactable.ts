@@ -1,4 +1,4 @@
-import { BadgeSelectionInteractableProps } from "@/web/components/Interactables/BadgeSelection/types";
+import { BadgeSelectionInteractableProps } from '@/web/components/BadgeSelection/types';
 
 interface BadgeSelectionInteractable {
   kind: 'badge-selection';
@@ -6,8 +6,8 @@ interface BadgeSelectionInteractable {
 }
 
 interface SelectInteractable {
-  kind: 'select-interactable',
-  props: {}
+  kind: 'select-interactable';
+  props: {};
 }
 
 export type Interactable = BadgeSelectionInteractable;

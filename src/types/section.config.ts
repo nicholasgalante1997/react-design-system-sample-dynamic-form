@@ -1,10 +1,4 @@
-import { Interactable } from './interactable';
-
-interface SubGroup {
-  interactables: Interactable[];
-  height?: string;
-  maxWidth?: string;
-}
+import { SubGroup } from './subgroup';
 
 export interface SectionConfiguration {
   id: string;

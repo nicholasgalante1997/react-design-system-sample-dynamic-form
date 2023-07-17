@@ -12,8 +12,8 @@ const pages = [
   {
     order: 1,
     parentFormId: 'mobile-plans',
-    sections: []
-  }
+    sections: [],
+  },
 ];
 
 function App() {

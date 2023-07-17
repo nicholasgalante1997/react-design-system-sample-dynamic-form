@@ -1,0 +1,29 @@
+.color-picker-item-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: var(--spacing-200);
+}
+
+.color-picker-item {
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
+  border: none;
+  margin-right: var(--spacing-300);
+}
+
+.color-picker-item-active {
+  border: 2px solid silver;
+}
+
+.color-picker-container {
+  width: 268px;
+  max-width: 268px;
+  min-height: 92px;
+}
+
+.color-picker-label {
+  font-weight: 300;
+}

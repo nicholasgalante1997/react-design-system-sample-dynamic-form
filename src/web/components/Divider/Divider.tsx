@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { withRenderMetrics } from '../../RenderMetric';
+import { withRenderMetrics } from '../RenderMetric';
 
 function DividerComponent() {
   return <hr className="divider" />;

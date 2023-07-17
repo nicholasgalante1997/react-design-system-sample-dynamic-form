@@ -1,4 +1,4 @@
-import { type SectionConfiguration } from './section';
+import { type SectionConfiguration } from './section.config';
 
 interface IDynamicForm {
   height?: string | number;

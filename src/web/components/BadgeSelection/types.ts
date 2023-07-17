@@ -1,5 +1,5 @@
 import React from 'react';
-import { BadgeProps } from '../../_base/Badge/types';
+import { BadgeProps } from '../Badge/types';
 
 export type BadgeSelectionInteractableProps = {
   /** Visible text above the section */

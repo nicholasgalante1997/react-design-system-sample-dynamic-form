@@ -1,0 +1,39 @@
+.radio-button-group-container-as-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--spacing-200);
+  padding-bottom: var(--spacing-200);
+}
+
+.radio-button-group-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  min-width: 268px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.row-reverse {
+    display: flex;
+    flex-direction: row;
+    min-width: 268px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.radio-label {
+  font-weight: 300;
+}
+
+.radio-label-active {
+  font-weight: 700;
+}
