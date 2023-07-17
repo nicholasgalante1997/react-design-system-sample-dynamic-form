@@ -45,7 +45,16 @@ function BadgeComponent(props: BadgeProps) {
   );
 
   return (
-    <div className={joinedClassnames.container} onClick={onChange} {...rest}>
+    <div
+      tabIndex={1}
+      role="button"
+      onKeyDown={(e) => {
+        if (e.key.toLowerCase() === 'enter') onChange();
+      }}
+      className={joinedClassnames.container}
+      onClick={onChange}
+      {...rest}
+    >
       <span className={joinedClassnames.span}>
         {checkJsx}
         {children}

@@ -1,11 +1,20 @@
-import React, { memo, useMemo, useState } from 'react';
+import React, { memo, useMemo, useState, useEffect } from 'react';
 import classNames from 'classnames';
+import isEq from 'lodash.isequal';
 import { RadioButtonGroupProps } from './types';
 import { withRenderMetrics } from '../RenderMetric';
+import { useFormDataRelayStore } from '@/web/store';
 
 function RadioButtonGroupComponent(props: RadioButtonGroupProps) {
   const { items, label, active, asRow = false, rowBackground, width = '100%' } = props;
   const [checkedValue, setCheckedValue] = useState(items.find((item) => item.value === active));
+  const identifier = `radio_group_${label}_${encodeURIComponent(JSON.stringify(items))}`;
+  const { fields, updateOrAddFields } = useFormDataRelayStore();
+  useEffect(() => {
+    if (!isEq(fields.get(identifier), checkedValue)) {
+      updateOrAddFields(identifier, checkedValue);
+    }
+  }, [checkedValue, fields]);
   const joinedClassNames = useMemo(
     () => ({
       parentContainer: classNames({
@@ -37,6 +46,7 @@ function RadioButtonGroupComponent(props: RadioButtonGroupProps) {
   return (
     <div
       role="radiogroup"
+      tabIndex={1}
       style={inlineContainerStyle}
       className={joinedClassNames.parentContainer}
     >
@@ -49,8 +59,12 @@ function RadioButtonGroupComponent(props: RadioButtonGroupProps) {
               key={item.key}
               id={item.key}
               checked={item.value === checkedValue?.value}
+              onKeyDown={(e) => {
+                if (e.key.toLowerCase() === 'enter') setCheckedValue(item);
+              }}
               type="radio"
               role="radio"
+              tabIndex={1}
               value={item.value}
               onChange={() => setCheckedValue(item)}
             />

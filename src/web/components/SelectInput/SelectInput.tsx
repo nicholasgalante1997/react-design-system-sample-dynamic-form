@@ -1,6 +1,8 @@
-import React, { memo, useCallback, useMemo, useState } from 'react';
-import { SelectProps } from './types';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
+import isEq from 'lodash.isequal';
+import { SelectProps } from './types';
+import { useFormDataRelayStore } from '@/web/store';
 
 function SelectComponent({ items, label, active, className, required }: SelectProps) {
   const [optionsActiveValue, setOptionsActiveValue] = useState(
@@ -12,6 +14,13 @@ function SelectComponent({ items, label, active, className, required }: SelectPr
     const { value } = event.target;
     setOptionsActiveValue(items.find((item) => item.value === value));
   }, []);
+  const identifier = `select_${encodeURIComponent(JSON.stringify(items))}`;
+  const { fields, updateOrAddFields } = useFormDataRelayStore();
+  useEffect(() => {
+    if (!isEq(fields.get(identifier), optionsActiveValue)) {
+      updateOrAddFields(identifier, optionsActiveValue);
+    }
+  }, [optionsActiveValue, fields]);
   const joinedClassNames = useMemo(
     () => ({
       containerClassName: classNames({
@@ -26,7 +35,7 @@ function SelectComponent({ items, label, active, className, required }: SelectPr
     [className]
   );
   return (
-    <div className={joinedClassNames.containerClassName}>
+    <div tabIndex={1} className={joinedClassNames.containerClassName}>
       <label className={joinedClassNames.labelClassName}>
         {label}
         {required && ' *'}
@@ -35,9 +44,10 @@ function SelectComponent({ items, label, active, className, required }: SelectPr
         value={optionsActiveValue?.key}
         onChange={onSelect}
         className={joinedClassNames.input}
+        tabIndex={1}
       >
         {items.map(({ key, text, value }) => (
-          <option value={value} key={key}>
+          <option tabIndex={1} value={value} key={key}>
             {text}
           </option>
         ))}

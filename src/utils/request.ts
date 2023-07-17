@@ -4,8 +4,6 @@ const localInstance = axios.create({
   headers: {
     'x-spectrum-write-key': process.env.WRITE_KEY,
     'Content-Type': 'application/json',
-    Accept: 'application/json',
-    'Content-Encoding': 'utf-8',
   },
 });
 

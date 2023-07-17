@@ -5,10 +5,11 @@ import { withRenderMetrics } from '../components/RenderMetric';
 import classNames from 'classnames';
 import { PageConfiguration } from '@/types/page.config';
 import { translateSectionsJsx } from './utils';
-import { useGetFormData } from '../hooks';
+import { useGetFormData, usePostFormData } from '../hooks';
 import { logger } from '@/utils';
 import { Link } from '../components/Link';
 import { Button } from '../components/Button/Button';
+import { useFormDataRelayStore } from '../store';
 
 type DynamicFormProps = {
   formKey: 'default' | 'beta' | 'gamma';
@@ -21,6 +22,8 @@ function DynamicForm({ formKey }: DynamicFormProps) {
   const [allPages, setAllPages] = useState<PageConfiguration[]>([]);
   const [currentPage, setCurrentPage] = useState<PageConfiguration | undefined>();
   const [formOpen, setFormOpen] = useState(true);
+  const { fields } = useFormDataRelayStore();
+  const { mutate } = usePostFormData();
   const isLoaded = useMemo(
     () => !isLoading && !isError && !!data && !!currentPage,
     [isLoading, isError, data, currentPage]
@@ -35,7 +38,6 @@ function DynamicForm({ formKey }: DynamicFormProps) {
       setCurrentPage(allPages[0]);
     }
   }, [allPages]);
-  logger.info({ data });
   const incrementPage = () => {
     if (isLoaded && currentPage && currentPage.order < allPages.length) {
       const next = currentPage.order + 1;
@@ -50,7 +52,9 @@ function DynamicForm({ formKey }: DynamicFormProps) {
       setCurrentPage(found);
     }
   };
-  const submit = () => {};
+  const onSubmit = () => {
+    mutate(fields);
+  };
   const isLastPage = currentPage?.order === allPages.length;
   const onClear = () => {
     queryClient.invalidateQueries({ queryKey: ['forms', formKey] });
@@ -79,6 +83,7 @@ function DynamicForm({ formKey }: DynamicFormProps) {
               <h2 className="heading-200">{currentPage.collapsibleSideHeading}</h2>
               <img
                 onClick={() => setFormOpen((prev) => !prev)}
+                onKeyDown={(e) => { if (e.key.toLowerCase() === 'enter') setFormOpen(p => !p)}}
                 role="button"
                 tabIndex={1}
                 className={formOpen ? 'invert' : ''}
@@ -114,7 +119,7 @@ function DynamicForm({ formKey }: DynamicFormProps) {
             <Button onClick={decrementPage} text="Back" />
             <Button onClick={onClear} text="Clear Order" />
             <Button
-              onClick={isLastPage ? submit : incrementPage}
+              onClick={isLastPage ? onSubmit : incrementPage}
               fill
               text={isLastPage ? 'Submit' : 'Next'}
             />

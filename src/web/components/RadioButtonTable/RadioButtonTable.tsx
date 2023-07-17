@@ -15,9 +15,9 @@ function RadioButtonTableComponent(props: RadioButtonTableProps) {
     []
   );
   return (
-    <div className={joinedClassNames.container}>
+    <div tabIndex={1} className={joinedClassNames.container}>
       <label className={joinedClassNames.label}>{title}</label>
-      <div className={joinedClassNames.itemContainer}>
+      <div tabIndex={1} className={joinedClassNames.itemContainer}>
         {items.map((item, index) => (
           <RadioButtonGroup
             asRow
