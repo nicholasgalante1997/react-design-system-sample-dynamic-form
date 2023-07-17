@@ -1,0 +1,46 @@
+.button-normal {
+  border: 2px solid #0080fe;
+  border-radius: 20px;
+  width: fit-content;
+  padding-left: var(--spacing-300);
+  padding-right: var(--spacing-300);
+  padding-top: var(--spacing-100);
+  padding-bottom: var(--spacing-100);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #0080fe;
+  cursor: pointer;
+}
+
+.button-normal:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0px 0px 8px rgba(0, 0, 0, 1),
+    0px 0px 8px rgba(255, 255, 255, 0.5);
+}
+
+.button-fill {
+  background-color: #0080fe;
+  border: 2px solid black;
+  border-radius: 20px;
+  width: fit-content;
+  padding-left: var(--spacing-300);
+  padding-right: var(--spacing-300);
+  padding-top: var(--spacing-100);
+  padding-bottom: var(--spacing-100);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+
+.button-fill:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0px 0px 8px rgba(0, 0, 0, 1),
+    0px 0px 8px rgba(255, 255, 255, 0.5);
+}

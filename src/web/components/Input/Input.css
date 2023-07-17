@@ -1,6 +1,7 @@
 .input {
   width: fit-content;
   min-width: 268px;
+  line-height: 1.15;
   background-color: var(--shade-200);
   border: 1px solid var(--shade-400);
   cursor: pointer;

@@ -33,24 +33,23 @@ export const Main: RadioButtonStory = {
 };
 
 export const AsRow: RadioButtonStory = {
-    args: {
-      label: 'Phone Selection',
-      asRow: true,
-      width: '800px',
-      rowBackground: 'lightblue',
-      items: [
-        {
-          key: 'iPhone',
-          label: 'iPhone',
-          value: 'iPhone',
-        },
-        {
-          key: 'Android',
-          label: 'Android',
-          value: 'Android',
-        },
-      ],
-    },
-    render: (args) => <RadioButtonGroup {...args} />,
-  };
-  
+  args: {
+    label: 'Phone Selection',
+    asRow: true,
+    width: '800px',
+    rowBackground: 'lightblue',
+    items: [
+      {
+        key: 'iPhone',
+        label: 'iPhone',
+        value: 'iPhone',
+      },
+      {
+        key: 'Android',
+        label: 'Android',
+        value: 'Android',
+      },
+    ],
+  },
+  render: (args) => <RadioButtonGroup {...args} />,
+};

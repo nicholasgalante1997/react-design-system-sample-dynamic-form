@@ -23,11 +23,11 @@
 }
 
 .row-reverse {
-    display: flex;
-    flex-direction: row;
-    min-width: 268px;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  min-width: 268px;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .radio-label {

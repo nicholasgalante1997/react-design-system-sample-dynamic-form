@@ -1,0 +1,19 @@
+.rbt-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.rbt-item-col {
+  width: 100%;
+}
+
+.rbt-item-col {
+  width: 100%;
+}
+
+.rbt-label {
+  font-weight: 800;
+}

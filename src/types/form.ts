@@ -1,37 +1,40 @@
 import { type SectionConfiguration } from './section.config';
 
-interface IDynamicForm {
-  height?: string | number;
-  width?: string | number;
+interface DynamicFormShape {
   heading: string;
   collapsible?: boolean;
   pages: SectionConfiguration[][];
   className?: string;
   id?: string;
+  actionEndpoint: string;
+  configEndpoint: string;
 }
 
 const defaultFormState = {
   heading: 'Mobile Plans',
   headingAccentText: '$39.99',
+  collapsible: true,
   pages: [],
+  configEndpoint: 'http://localhost:3000/load-form',
+  actionEndpoint: 'http://localhost:3000/submit',
 };
 
-export class DynamicForm implements IDynamicForm {
-  height?: string | number | undefined;
-  width?: string | number | undefined;
+export class DynamicForm implements DynamicFormShape {
   heading: string;
+  actionEndpoint: string;
+  configEndpoint: string;
   collapsible?: boolean | undefined;
   pages: SectionConfiguration[][];
   className?: string | undefined;
   id?: string | undefined;
-  constructor(options: IDynamicForm = defaultFormState) {
-    this.height = options.height;
+  constructor(options: DynamicFormShape = defaultFormState) {
     this.heading = options.heading;
     this.collapsible = options.collapsible;
     this.pages = options.pages;
-    this.width = options.width;
     this.className = options.className;
     this.id = options.id;
+    this.actionEndpoint = options.actionEndpoint;
+    this.configEndpoint = options.configEndpoint;
   }
   update(key: string, value: any) {
     this[key as keyof typeof this] = value;

@@ -11,29 +11,29 @@ function RadioButtonGroupComponent(props: RadioButtonGroupProps) {
       parentContainer: classNames({
         ['radio-button-group-container-as-row']: asRow,
         ['radio-button-group-container']: !asRow,
-        'mb-200': true,
+        'mb-200': !asRow,
       }),
       label: classNames({
         ['body-normal-100']: true,
         ['mb-200']: !asRow,
-        ['ml-200']: asRow
+        ['ml-200']: asRow,
       }),
       radioButton: classNames('mr-200', 'radio-button'),
       radioLabel: 'radio-label',
       row: classNames({
-        'row': !asRow,
+        row: !asRow,
         'row-reverse': asRow,
-      })
+      }),
     }),
     []
   );
   const inlineContainerStyle = useMemo(() => {
     if (!asRow) return {};
     return {
-        background: rowBackground,
-        width
+      background: rowBackground,
+      width,
     };
-  }, [asRow, rowBackground, width])
+  }, [asRow, rowBackground, width]);
   return (
     <div
       role="radiogroup"
@@ -57,6 +57,7 @@ function RadioButtonGroupComponent(props: RadioButtonGroupProps) {
             <label
               className={classNames({
                 [joinedClassNames.radioLabel]: true,
+                'body-normal-200': true,
                 ['radio-label-active']: checkedValue?.value === item.value,
               })}
               htmlFor={item.key}

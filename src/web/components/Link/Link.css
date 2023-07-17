@@ -1,5 +1,12 @@
 .spectrum-link {
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.spectrum-link img {
+  margin-right: var(--spacing-100);
 }
 
 .spectrum-link:visited {

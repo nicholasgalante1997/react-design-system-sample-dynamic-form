@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import { withRenderMetrics } from '@/web/components/RenderMetric';
 import { type BadgeProps } from './types';
 
+const checkSvgUrl = process.env.NODE_ENV === 'production' ? '/app/assets/check.svg' : '/check.svg';
+
 function BadgeComponent(props: BadgeProps) {
   const { active = false, onChange, scale, withIcon, children, className, ...rest } = props;
   const joinedClassnames = useMemo(
@@ -35,7 +37,7 @@ function BadgeComponent(props: BadgeProps) {
           className="badge-check-svg"
           height="16px"
           width="16px"
-          src="/check.svg"
+          src={checkSvgUrl}
           alt="a check mark"
         />
       ),

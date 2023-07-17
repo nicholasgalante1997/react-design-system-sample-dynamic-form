@@ -1,15 +1,21 @@
 @import './__generated__/css/index.css';
 @import './web/components/Link/Link.css';
 @import './web/components/Badge/Badge.css';
+@import './web//components//Button/Button.css';
 @import './web/components/SelectInput/SelectInput.css';
 @import './web/components/Input/Input.css';
 @import './web/components/RadioButtonGroup/RadioButtonGroup.css';
+@import './web/components/RadioButtonTable/RadioButtonTable.css';
 @import './web/components/BadgeSelection/BadgeSelection.css';
 @import './web/components/ColorPicker/ColorPicker.css';
 @import './web/pages/fragments/Heading.css';
 
 * {
   box-sizing: border-box;
+}
+
+input {
+  cursor: pointer;
 }
 
 html,
@@ -32,9 +38,40 @@ body {
 }
 
 .config-section {
-  width: 280px;
+  width: 220px;
   min-height: calc(100vh - 40px);
   background-color: #1c1c21;
+}
+
+.configure-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 120px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.collapsible-section {
+  margin-top: var(--spacing-100);
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.collapsible-section-row {
+  display: flex;
+  flex-direction: row;
+  min-width: 90px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.collapsible-section-row img {
+  cursor: pointer;
 }
 
 .form-section {
@@ -54,12 +91,11 @@ body {
 }
 
 .form-container {
-  min-height: 60px;
-  height: fit-content;
   padding: var(--spacing-300);
-  width: 800px;
+  width: 1000px;
   background-color: #faf9f6;
   border-radius: var(--border-radius-200);
+  color: black;
 }
 
 .form-heading {
@@ -74,4 +110,80 @@ body {
     0px 0px 4px rgba(255, 255, 255, 0.3);
   padding: var(--spacing-300);
   border-radius: var(--border-radius-200);
+}
+
+.form-footer {
+  margin-top: var(--spacing-300);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.form-footer-button-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.form-footer-button-row button {
+  margin-left: var(--spacing-300);
+}
+
+.form-body-link-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: var(--spacing-400);
+  margin-bottom: var(--spacing-200);
+}
+
+.form-body-link-container * {
+  margin-right: var(--spacing-200);
+}
+
+.form-subsection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--spacing-200);
+}
+
+.interactable-subgroup {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: var(--spacing-100);
+  padding-bottom: var(--spacing-100);
+}
+
+.interactable-subgroup * {
+  margin-right: var(--spacing-200);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  height: 200px;
+  width: 200px;
+  border: 4px solid silver;
+  border-top: 4px solid white;
+  border-radius: 100px;
+  animation: spin 800ms linear 0s infinite;
+}
+
+.invert {
+  transform: rotate(180deg);
 }

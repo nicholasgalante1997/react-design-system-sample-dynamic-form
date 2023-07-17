@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 const localInstance = axios.create({
-  baseURL: '/api',
   headers: {
     'x-spectrum-write-key': process.env.WRITE_KEY,
     'Content-Type': 'application/json',

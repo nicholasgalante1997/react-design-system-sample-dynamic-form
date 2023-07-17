@@ -7,7 +7,7 @@ function InputComponent({ label, className, required, value, ...rest }: InputPro
   const onChange = (e: ChangeEvent<HTMLInputElement>) => setLocalInputValue(e.target.value);
   const joinedClassNames = useMemo(
     () => ({
-      containerClassName: 'input-container',
+      containerClassName: classNames('input-container', 'p-200'),
       labelClassName: classNames('input-label', 'body-normal-100', 'mt-200'),
       input: classNames('input', 'mt-200'),
     }),

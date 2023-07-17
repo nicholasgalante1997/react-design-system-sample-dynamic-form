@@ -20,8 +20,8 @@ function SelectComponent({ items, label, active, className, required }: SelectPr
         'p-200': true,
         'select-input-container': true,
       }),
-      labelClassName: classNames('body-normal-200', 'color-scale-500', 'select-label'),
-      input: classNames('select-input', 'body-normal-200'),
+      labelClassName: classNames('body-normal-100', 'color-scale-500', 'select-label'),
+      input: classNames('select-input', 'body-normal-100'),
     }),
     [className]
   );
