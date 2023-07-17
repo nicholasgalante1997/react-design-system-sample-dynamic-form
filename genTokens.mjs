@@ -292,16 +292,11 @@ function buildCss(tokenJson) {
     }
 }
 
-/** ts utilities */
-
-function buildTypes(tokenJson) {}
-
 function build() {
     try {
         console.log('Beginning `generate` operation...');
         const tokenJson = loadTokens();
         buildCss(tokenJson);
-        buildTypes(tokenJson);
     } catch (e) {
         console.error(e);
     }
